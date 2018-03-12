@@ -13,7 +13,8 @@ var result = require('./routes/result');
 var searchcustomer = require('./routes/searchCustomer');
 var customer = require('./routes/customer');
 var inventory = require('./routes/inventory');
-
+// var MongoStore = require('connect-mongo')(connect)
+var settings = require('./settings');
 
 
 var app = express();
