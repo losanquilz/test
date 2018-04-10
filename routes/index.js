@@ -55,7 +55,7 @@ var router = express.Router();
                 // }
             // }
         // })
-    // res.render('index', { title: 'Index' });
+    res.render('index', { title: 'Index' });
     });
 
 module.exports = router;
