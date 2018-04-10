@@ -6,63 +6,63 @@
     <link href="/stylesheets/main.css" rel="stylesheet">
 
     <link href="/stylesheets/sidebar.css" rel="stylesheet">
+	<head>
+		<!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
 
-  <body>
-    <div id="wrapper">
-        <!-- Sidebar -->
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
 
-          <div id="page-content-wrapper">
-              <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">查詢訂單</h1>
-                      </div>
-                    </div>
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
 
-                  <!-- <div class="row">
-                      <div class="col-lg-12">
-                              <form method="post" action="/searchOrder">
-                                <p>
-                                  月：<input type="text" id="month" name="month" /></input>
-                                </p>
-                                <p>
-                                  日：<input type="text" id="date" name="month" /></input>
-                                </p>
-                                <a>
-                                  <input type="submit" value="查詢"/></input>
-                                </a>
-                              </form>
-                      </div>
-                  </div> -->
-                </div>
-                <table>
-                  <tr>
-                    <th>No</th>
-                    <th>訂單編號</th>
-                    <th>產品名稱</th>
-                    <th>數量</th>
-                    <th width=100px>動作</th>
-                  </tr>
-                  <% if(orders){
-                    for(var i = 0;i < orders.length;i++) { %>
-                      <tr>
-                        <td><%=orders[i].id%></td>
-                        <td><%=orders[i].Order_ID%></td>
-                        <td><%=orders[i].Name%></td>
-                        <td><%=orders[i].quantity%></td>
-                        <td>
-                          <a class="a-inside edit" href="../searchOrder/edit/<%=orders[i].id%>">編輯</a>
-                          <a class="a-inside delete" href="../searchOrder/delete/<%=orders[i].id%>">刪除</a>
-                        </td>
-                      </tr>
-                      <% }
-                    }else{ %>
-                      <tr>
-                        <td colspan="5" >查無結果</td>
-                      </tr>
-                      <% } %>
-                    </table>
-              </div>
-          </div>
-  </body>
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'values');
+        data.addRows([
+          ['好', 300],
+          ['不好', 250],
+        ]);
+		
+        // Set chart options
+        var options = {'title':'航空公司評價',
+                       'width':1000,
+                       'height':500};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+	</head>
+	<body>
+		請選擇：&nbsp;&nbsp;
+		<select style="font-size:20px;height:30px">
+					<option value="date">日期</option>
+					<option value="relation">相關</option>
+					<option value="response">回復</option>
+					<option value="good">點讚</option>
+		</select>&nbsp;&nbsp;
+		<select style="font-size:20px;height:30px">
+					<option value="date">一個月</option>
+					<option value="relation">三個月</option>
+					<option value="response">半年</option>
+					<option value="good">一年</option>
+		</select>&nbsp;&nbsp;
+		<select style="font-size:20px;height:30px">
+					<option value="date">論壇</option>
+					<option value="relation">新聞</option>
+					<option value="response">回復</option>
+					<option value="good">點讚</option>
+		</select>&nbsp;&nbsp;
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+	</body>
 </html>

@@ -1,20 +1,20 @@
 var express = require('express');
 var path = require('path');
-// var favicon = require('serve-favicon');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-sessions');
 var routes = require('./routes/index');
-var order = require('./routes/order');
-var newOrder=require('./routes/newOrder');
+// var order = require('./routes/order');
+// var newOrder=require('./routes/newOrder');
 var searchOrder = require('./routes/searchOrder');
-var result = require('./routes/result');
-var searchcustomer = require('./routes/searchCustomer');
-var customer = require('./routes/customer');
-var inventory = require('./routes/inventory');
+// var result = require('./routes/result');
+// var searchcustomer = require('./routes/searchCustomer');
+// var customer = require('./routes/customer');
+// var inventory = require('./routes/inventory');
 // var MongoStore = require('connect-mongo')(connect)
-var settings = require('./settings');
+// var settings = require('./settings');
 
 
 var app = express();
@@ -33,15 +33,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/order', order);
-app.use('/newOrder', newOrder);
+// app.use('/order', order);
+// app.use('/newOrder', newOrder);
 app.use('/searchOrder', searchOrder);
-app.use('/result', result);
-app.use('/searchcustomer',searchcustomer);
-app.use('/customer',customer);
-app.use('/inventory',inventory );
-app.get('/searchOrder/delete/:id', searchOrder);
-app.get('/searchOrder/edit/:id', searchOrder);
+// app.use('/result', result);
+// app.use('/searchcustomer',searchcustomer);
+// app.use('/customer',customer);
+// app.use('/inventory',inventory );
+// app.get('/searchOrder/delete/:id', searchOrder);
+// app.get('/searchOrder/edit/:id', searchOrder);
 // app.post('/customers/edit/:id',searchOrder);
 
 

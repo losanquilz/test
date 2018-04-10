@@ -2,11 +2,16 @@ var db = require('../libs/db');
 var GeneralErrors = require('../errors/GeneralErrors');
 var Order_Product = require('../models/Order_Product');
 
-var order = function(options) {
-  this.id = options.id;
-  this.systime = options.systime;
-  this.O_amount=options.O_amount;
-};
+
+function order(username,post,time){
+    this.user=username;
+    this.post=post;
+    if(time){
+        this.time=time;
+    }else{
+        this.time=new Date();
+    }
+}
 order.getAll = function(month, cb) {
   console.log(month[0]);
   db.select("*")
@@ -41,40 +46,32 @@ order.getAll = function(month, cb) {
 };
 
 
-order.prototype.save = function (cb) {
-  if (this.id) {
-    //已存在
-    db("Order_Form")
-      .where({
-        Orderform_ID : this.id
-      })
-      .update({
-          O_amount:this.O_amount
-      })
-      .then(function() {
-
-        cb(null, this);
-      }.bind(this))
-      .catch(function(err) {
-        console.log("ORDER UPDATED", err);
-        cb(new GeneralErrors.Database());
-      });
-  } else {
-    db("Order_Form")
-      .insert({
-        systime: this.systime,
-        O_amount:this.O_amount
-      })
-      .then(function(result) {
-        this.id = result[0];
-        cb(null, this);
-      }.bind(this))
-      .catch(function(err) {
-        console.log("ORDER INSERT", err);
-        cb(new GeneralErrors.Database());
-      });
-  }
-};
+order.prototype.save=function save(callback){
+    //存入mongodb的文档
+    var post={
+        user:this.user,
+        post:this.post,
+        time:this.time
+    }
+    mongodb.open(function(err,db){
+        if(err){
+            return callback(err);
+        }
+        //读取posts集合
+        db.collection("posts",function(err,collection){
+            if(err){
+                mongodb.close();
+                return callback(err);
+            }
+            //为user属性添加索引
+            collection.ensureIndex("user");
+            collection.insert(post,{safe:true},function(err){
+                mongodb.close();
+                callback(err,post);
+            })
+        })
+    })
+}
 order.prototype.edit = function(req, cb) {
     db('Order_Form')
         .update({
@@ -88,5 +85,38 @@ order.prototype.edit = function(req, cb) {
             console.log(err);
         })
 };
+order.prototype.find=function(username,callback){
+    mongodb.open(function(err,db){
+        if(err){
+            return callback(err);
+        }
+        //读取posts文档
+        db.collection("posts",function(err,collection){
+            if(err){
+               mongodb.close();
+                return callback(err);
+            }
+            //查找user属性为username的文档，如果为null则全部匹配
+            var query={};
+            if(username){
+                query.user=username;
+            }
+            //按时间排序，并转成数组
+            collection.find(query).sort({time:-1}).toArray(function(err,docs){
+                mongodb.close();
+                if(err){
+                    callback(err,null);
+                }
+                //封装posts为Post对象
+                var posts=[];
+                docs.forEach(function(doc,index){
+                    var post=new Post(doc.user,doc.post,doc.time);
+                    posts.push(post);
+                })
+                callback(null,posts);
+            })
+        })
+    })
+}
 
 module.exports = order;
