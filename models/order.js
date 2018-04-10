@@ -85,5 +85,38 @@ order.prototype.edit = function(req, cb) {
             console.log(err);
         })
 };
+order.prototype.find=function(username,callback){
+    mongodb.open(function(err,db){
+        if(err){
+            return callback(err);
+        }
+        //读取posts文档
+        db.collection("posts",function(err,collection){
+            if(err){
+               mongodb.close();
+                return callback(err);
+            }
+            //查找user属性为username的文档，如果为null则全部匹配
+            var query={};
+            if(username){
+                query.user=username;
+            }
+            //按时间排序，并转成数组
+            collection.find(query).sort({time:-1}).toArray(function(err,docs){
+                mongodb.close();
+                if(err){
+                    callback(err,null);
+                }
+                //封装posts为Post对象
+                var posts=[];
+                docs.forEach(function(doc,index){
+                    var post=new Post(doc.user,doc.post,doc.time);
+                    posts.push(post);
+                })
+                callback(null,posts);
+            })
+        })
+    })
+}
 
 module.exports = order;
