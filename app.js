@@ -38,6 +38,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
+
 // app.use('/order', order);
 // app.use('/newOrder', newOrder);
 app.use('/introduction', introduction);
@@ -51,7 +52,27 @@ app.use('/chart', chart);
 // app.get('/searchOrder/edit/:id', searchOrder);
 // app.post('/customers/edit/:id',searchOrder);
 
+var mysql = require("mysql");
+var con = mysql.createConnection({
+    host: "140.119.19.40",
+    user: "test",
+    password: "realone",
+    database: "test"
+});
 
+ con.connect(function(err) {
+    if (err) {
+        console.log('connecting error');
+        return;
+    }
+    console.log('connecting success');
+});
+
+
+app.use(function(req, res, next) {
+    req.con = con;
+    next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
