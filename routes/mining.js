@@ -1,107 +1,61 @@
 var express = require('express');
 var router = express.Router();
-var order = require('../models/order');
-var Order_Product = require('../models/Order_Product');
+// var order = require('../models/order');
+// var Order_Product = require('../models/Order_Product');
+// var RFM=require('../models/RFM');
 
 
-router.get('/', function(req, res, next) {
- 
+    router.get('/mining', function(req, res, next) {
+        // RFM.get(function(err,RFM_list) {
+            // if(err) {
+                // res.status = err.code;
+                // res.json(err);
+            // } else {
+                // for(i=0;i<RFM_list.length;i++){
+                    // var RFM_edit=new RFM({
+                        // RFM_Score : RFM_list[i].RFM_Score,
+                        // BEI : RFM_list[i].BEI
+                    // });
 
-  Order_Product.getAll(function(err, orders){
-    if(err){
-      res.status(err.code);
-      res.json(err);
-    }else{
-      res.render('searchOrder', {
-        title: 'searchOrder',
-        orders:orders
-      });
-    }
-  })
-});
+                    // RFM_edit.save(function(err) {
+                        // if(err) {
+                            // res.status = err.code;
+                            // res.json(err);
+                        // } else {
+                            // console.log('BEI success');
+                        // }
+                    // });
+                // }
 
-router.post('/', function(req, res, next) {
-  Order_Product.countAmount(function(err, orders){
-      if(err){
-          res.status(err.code);
-          res.json(err);
-      }else{
+            // }
+        // });
 
-      }
-  })
-  Order_Product.getAll(function(err, orders){
-    if(err){
-      res.status(err.code);
-      res.json(err);
-    }else{
-      res.render('searchOrder', {
-        title: 'searchOrder',
-        orders:orders
-      });
-    }
-  })
-});
+        // Order_Product.countAmount(1,function(err, list){
+            // if(err){
+                // res.status(err.code);
+                // res.json(err);
+            // }else{
+                // console.log(list);
+                // for(i=0;i<list.length;i++){
+                    // console.log(list[i].Order_ID);
+                    // var editOrderForm=new order({
+                        // id : list[i].Order_ID,
+                        // O_amount : list[i].amount
+                    // });
+                    // console.log(editOrderForm.id);//testline
 
-router.get('/delete/:id', function(req, res, next) {
-  var id = req.params.id;
-  // console.log(req.params.id); //testline
-  // console.log(id); //testline
-  Order_Product.delete(id,function(err,rows){
-    if(err) {
-  res.status = err.code;
-  res.json(err);
-  } else {
-    res.redirect("/searchOrder");
-    res.render('searchOrder', {
-      title: 'searchOrder',
-      orders:orders
+                    // editOrderForm.save(function(err) {
+                        // if(err) {
+                            // res.status = err.code;
+                            // res.json(err);
+                        // } else {
+                            // console.log('success');
+                        // }
+                    // });
+                // }
+            // }
+        // })
+    res.render('mining', { title: 'Mining' });
     });
-  }
-})
-});
-
-
-router.get('/edit/:id',function(req, res, next) {
-  var id = req.params.id;
-  Order_Product.get(id,function(err, orders){
-    if(err){
-      res.status(err.code);
-      res.json(err);
-    }else{
-      res.render('edit', {
-        title: 'edit',
-        orders:orders,
-       });
-    }
-  })
-});
-
-router.post('/edit/:id', function(req, res, next) {
-  var id = req.params.id;
-  var editOrderProduct=new Order_Product({
-    id:req.params.id,
-    Order_ID : req.body.Order_ID,
-    Product_ID : req.body.Product_ID,
-    quantity : req.body.quantity
-  });
-  // console.log(input); //testline
-  console.log(req.body.Product_ID);
-  // console.log(id); //testline
-  editOrderProduct.edit(id,function(err,orders){
-    if(err) {
-  res.status = err.code;
-  res.json(err);
-  } else {
-    res.redirect("/searchOrder");
-    res.render('searchOrder', {
-      title: 'searchOrder',
-      orders:orders
-    });
-  }
-})
-});
-
-
-
 
 module.exports = router;
