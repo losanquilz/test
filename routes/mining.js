@@ -5,7 +5,7 @@ var router = express.Router();
 // var RFM=require('../models/RFM');
 
 
-    router.get('/mining', function(req, res, next) {
+    router.get('/', function(req, res, next) {
         // RFM.get(function(err,RFM_list) {
             // if(err) {
                 // res.status = err.code;
