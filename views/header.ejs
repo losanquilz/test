@@ -13,6 +13,22 @@
 	.list2{
 		color:white;
 	}
+	body {font-family: Arial;}
+	.tab {
+		overflow:hidden;border:1px solid #ccc;background-color:#DDDDDD;width:850px;
+	}
+	.tab button {
+		background-color:inherit;float: left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:0.3s;font-size:15px;color:#000000;
+	}
+	.tab button:hover {
+		background-color:#ddd;
+	}	
+	.tab button.active {
+		background-color:#ccc;
+	}
+	.tabcontent {
+		display:none;padding:6px 12px;border: 1px solid #ccc;border-top: none;width:850px;height:300px;
+	}
   </style>
     <div id="wrapper">
         <!-- Sidebar -->
@@ -22,19 +38,29 @@
                 主選單
               </h1>
               <li class="sidebar-brand">
-                <a>首頁</a>
+                <form method="get" action="/" >
+                    <input type="submit" value="首頁"/>
+                </form>
               </li>
 			  <li class="sidebar-brand">
-                <a>網站簡介</a>
+                <form method="get" action="/introduction" >
+                    <input type="submit" value="網站簡介"/>
+                </form>
               </li>
 			  <li class="sidebar-brand">
-                <a>開始探勘</a>
+                <form method="get" action="/mining" >
+                    <input type="submit" value="開始探勘"/>
+                </form>
               </li>
 			  <li class="sidebar-brand">
-                <a>圖表分析</a>
+                <form method="get" action="/chart" >
+                    <input type="submit" value="圖表分析"/>
+                </form>
               </li>
 			  <li class="sidebar-brand">
-                <a>詞庫</a>
+                <form method="get" action="#" >
+                    <input type="submit" value="詞庫"/>
+                </form>
               </li>
               <p class="footer"> Copyright © 106-2 資管專案系統</p>
             </ul>

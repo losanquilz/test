@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+   <% include ./header %>
+<html>
+
+    <title>資管專案系統</title>
+
+    <link href="stylesheets/main.css" rel="stylesheet">
+
+    <link href="stylesheets/sidebar.css" rel="stylesheet">
+
+  <body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+
+          <div id="page-content-wrapper">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-12">
+						<h6 class="list1">會員登入</h6>
+                          <h1 class="page-header">開始探勘</h1>
+						  <br>
+						  		<div class="contant2">
+			<form action="form_action.asp" method="get">
+				<h4 class="list2">請選擇:</h4>
+				<select style="font-size:20px;height:30px">
+					<option value="China Airline">華航</option>
+					<option value="Eva Air">長榮</option>
+				</select>&nbsp;&nbsp;		
+				<select style="font-size:20px;height:30px">
+					<option value="a month">一個月</option>
+					<option value="three month">三個月</option>
+					<option value="half year">半年</option>
+					<option value="a year">一年</option>
+				</select>&nbsp;&nbsp;
+				<select style="font-size:20px;height:30px">
+					<option value="apple daily">蘋果日報</option>
+					<option value="udn">聯合報</option>
+					<option value="ptt">ptt</option>
+					<option value="forum">論壇</option>
+					
+				</select>&nbsp;&nbsp;
+				<input type="submit" value="開始檢索" style="font-size:20px;height:40px"/>&nbsp;&nbsp;
+			</form>
+		</div>
+		<br>
+		<br>
+		<div class="contain3">
+			<div class="tab">
+				<button class="tablinks" onclick="indextab(event, 'relsults')">蘋果日報</button>
+				<button class="tablinks" onclick="indextab(event, 'charts')">聯合日報</button>
+				<button class="tablinks" onclick="indextab(event, 'cloud')">ptt</button>
+				<button class="tablinks" onclick="indextab(event, 'cloud')">論壇</button>
+			</div>
+			<div id="relsults" class="tabcontent">
+					<table order="1" Frame="below">
+	　				<tr>
+　						<td width="50">ID</td>
+						<td width="250">關鍵句</td>
+						<td width="300">發布時間</td>
+						<td width="150">來源</td>
+	　				</tr>
+					<tr>
+					</tr>
+				</table>
+			</div>
+			<div id="charts" class="tabcontent">
+				<table order="1" Frame="below">
+	　				<tr>
+　						<td width="50">ID</td>
+						<td width="250">關鍵句</td>
+						<td width="300">發布時間</td>
+						<td width="150">來源</td>
+	　				</tr>
+				</table>
+			</div>
+			<div id="cloud" class="tabcontent">
+				<table order="1" Frame="below">
+	　				<tr>
+　						<td width="50">ID</td>
+						<td width="250">關鍵句</td>
+						<td width="300">發布時間</td>
+						<td width="150">來源</td>
+	　				</tr>
+					<tr>
+					</tr>
+				</table>
+			</div>
+			<div id="cloud" class="tabcontent">
+				<table order="1" Frame="below">
+	　				<tr>
+　						<td width="50">編號</td>
+						<td width="250">關鍵句</td>
+						<td width="300">發布時間</td>
+						<td width="150">來源</td>
+	　				</tr>
+					<tr>
+					</tr>
+				</table>
+			</div>
+			<script>
+				function indextab(evt, tabname) {
+					var i, tabcontent, tablinks;
+					tabcontent = document.getElementsByClassName("tabcontent");
+					for (i = 0; i < tabcontent.length; i++) {
+						tabcontent[i].style.display = "none";
+					}
+					tablinks = document.getElementsByClassName("tablinks");
+					for (i = 0; i < tablinks.length; i++) {
+						tablinks[i].className = tablinks[i].className.replace(" active", "");
+					}
+					document.getElementById(tabname).style.display = "block";
+					evt.currentTarget.className += " active";
+				}
+			</script>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- /#page-content-wrapper -->
+    </div>
+
+  </body>
+</html>
+	

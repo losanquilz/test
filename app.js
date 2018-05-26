@@ -6,9 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-sessions');
 var routes = require('./routes/index');
+var introduction = require('./routes/introduction');
+var mining = require('./routes/mining');
+var chart = require('./routes/chart');
+
+
 // var order = require('./routes/order');
 // var newOrder=require('./routes/newOrder');
-var searchOrder = require('./routes/searchOrder');
+//var searchOrder = require('./routes/searchOrder');
 // var result = require('./routes/result');
 // var searchcustomer = require('./routes/searchCustomer');
 // var customer = require('./routes/customer');
@@ -31,11 +36,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', routes);
+
+
 // app.use('/order', order);
 // app.use('/newOrder', newOrder);
-app.use('/searchOrder', searchOrder);
+app.use('/introduction', introduction);
+app.use('/mining', mining);
+app.use('/chart', chart);
 // app.use('/result', result);
 // app.use('/searchcustomer',searchcustomer);
 // app.use('/customer',customer);
@@ -44,6 +52,27 @@ app.use('/searchOrder', searchOrder);
 // app.get('/searchOrder/edit/:id', searchOrder);
 // app.post('/customers/edit/:id',searchOrder);
 
+var mysql = require("mysql");
+var con = mysql.createConnection({
+    host: "140.119.19.40",
+    user: "test",
+    password: "realone",
+    database: "test"
+});
+
+ con.connect(function(err) {
+    if (err) {
+        console.log('connecting error');
+        return;
+    }
+    console.log('connecting success');
+});
+
+
+app.use(function(req, res, next) {
+    req.con = con;
+    next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
