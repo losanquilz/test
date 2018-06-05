@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+ var express = require('express');
+ var router = express.Router();
 // var order = require('../models/order');
 // var Order_Product = require('../models/Order_Product');
 // var RFM=require('../models/RFM');
@@ -58,4 +58,4 @@ var router = express.Router();
     res.render('index', { title: 'Index' });
     });
 
-module.exports = router;
+module.exports = router; 

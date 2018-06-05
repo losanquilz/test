@@ -1,29 +1,29 @@
-1 <!DOCTYPE html>
- 2 <html>
- 3 <head>
- 4  <meta charset='utf-8'>
- 5  <title>最新消息</title>
- 6   <link rel='stylesheet' href='/stylesheets/style.css' />
- 7 </head>
- 8 <body>
- 9   <div class="boxLogin">
-10     <form action="" method="POST" id="loginform">
-11       <div class="fields">
-12         <p class="sep">
-13           <label class="small" for="username">管理者帳號</label>
-14           <input name="username" type="text" id="username" required />
-15         </p>
-16         <p class="sep">
-17           <label class="small" for="password">管理者密碼</label>
-18           <input name="password" type="password" id="password" required />
-19         </p>
-20         <div class="action">
-21           <input type="submit" class="butDef" value="登入系統" />
-22           <input name="button1" type="button" value="退回首頁" onclick="window.location='/index?pageNo=<%= pageNo %>'" />
-23         </div>
-24         <span style="color:red"><%= messages %></span>
-25       </div>
-26     </form>
-27   </div>
-28 </body>
-29 </html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>最新消息</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <div class="boxLogin">
+    <form action="" method="POST" id="loginform">
+      <div class="fields">
+        <p class="sep">
+          <label class="small" for="username">管理者帳號</label>
+          <input name="username" type="text" id="username" required />
+        </p>
+        <p class="sep">
+          <label class="small" for="password">管理者密碼</label>
+          <input name="password" type="password" id="password" required />
+        </p>
+        <div class="action">
+          <input type="submit" class="butDef" value="登入系統" />
+          <input name="button1" type="button" value="退回首頁" onclick="window.location='/index?pageNo=<%= pageNo %>'" />
+        </div>
+        <span style="color:red"><%= messages %></span>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

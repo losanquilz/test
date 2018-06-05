@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 var introduction = require('./routes/introduction');
 var mining = require('./routes/mining');
 var chart = require('./routes/chart');
-
+var login = require('./routes/login');
 
 // var order = require('./routes/order');
 // var newOrder=require('./routes/newOrder');
@@ -44,6 +44,7 @@ app.use('/', routes);
 app.use('/introduction', introduction);
 app.use('/mining', mining);
 app.use('/chart', chart);
+app.use('/login', login);
 // app.use('/result', result);
 // app.use('/searchcustomer',searchcustomer);
 // app.use('/customer',customer);
