@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var pool = require('C:/Users/xup6r/Documents/GitHub/test/libs/db.js');
+var pool = require('../libs/db.js');
 
 var app = express();
 var cookieParser = require('cookie-parser');
