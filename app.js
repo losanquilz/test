@@ -10,6 +10,7 @@ var introduction = require('./routes/introduction');
 var mining = require('./routes/mining');
 var chart = require('./routes/chart');
 var login = require('./routes/login');
+var reg = require('./routes/reg');
 
 // var order = require('./routes/order');
 // var newOrder=require('./routes/newOrder');
@@ -41,6 +42,7 @@ app.use('/', routes);
 
 // app.use('/order', order);
 // app.use('/newOrder', newOrder);
+app.use('/reg', reg);
 app.use('/introduction', introduction);
 app.use('/mining', mining);
 app.use('/chart', chart);

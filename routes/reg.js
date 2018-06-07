@@ -20,4 +20,5 @@ router.post('/', function(req, res) {
       username: userName,
       userpass: userPwd
   });
+});
 module.exports = router;
