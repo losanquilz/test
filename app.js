@@ -28,7 +28,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-// app.use(session({secret : 'session'}));
+// app.use(session({secret : 'session'})); //Do the auth logic 
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -37,16 +37,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', routes);
 
+app.use('/', login);
+app.use('/reg', reg);
 
+app.use(function(req, res, next) {
+   if(req.session.username !== undefined) {
+	   console.log('inininin');
+	   next();
+   }
+   else{
+      res.redirect('/');
+   }
+});
+
+app.use('/index', routes);
 // app.use('/order', order);
 // app.use('/newOrder', newOrder);
-app.use('/reg', reg);
 app.use('/introduction', introduction);
 app.use('/mining', mining);
 app.use('/chart', chart);
-app.use('/login', login);
 app.use('/logout', logout);	
 // app.use('/result', result);
 // app.use('/searchcustomer',searchcustomer);
@@ -60,7 +70,7 @@ var mysql = require("mysql");
 var con = mysql.createConnection({
     host: "140.119.19.40",
     user: "test",
-    password: "1u4u,4",
+    password: "realone",
     database: "test"
 });
 
