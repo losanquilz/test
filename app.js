@@ -11,8 +11,8 @@ var mining = require('./routes/mining');
 var chart = require('./routes/chart');
 var login = require('./routes/login');
 var reg = require('./routes/reg');
+var logout = require('./routes/logout');
 
-// var order = require('./routes/order');
 // var newOrder=require('./routes/newOrder');
 //var searchOrder = require('./routes/searchOrder');
 // var result = require('./routes/result');
@@ -47,6 +47,7 @@ app.use('/introduction', introduction);
 app.use('/mining', mining);
 app.use('/chart', chart);
 app.use('/login', login);
+app.use('/logout', logout);	
 // app.use('/result', result);
 // app.use('/searchcustomer',searchcustomer);
 // app.use('/customer',customer);

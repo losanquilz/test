@@ -38,7 +38,7 @@ router.post('/', function(req, res) {  //按登入系統鈕
       res.render('login', {messages:messages, pageNo:pageNo})
     } else {  //帳號及密碼皆正確
       req.session.username = username;  //設定session
-      res.redirect('/');  //開啟管理頁面
+      res.redirect('/logout');  //開啟管理頁面
     }
   });
 });
