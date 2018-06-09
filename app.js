@@ -11,7 +11,6 @@ var mining = require('./routes/mining');
 var chart = require('./routes/chart');
 var login = require('./routes/login');
 var reg = require('./routes/reg');
-var logout = require('./routes/logout');
 
 // var newOrder=require('./routes/newOrder');
 //var searchOrder = require('./routes/searchOrder');
@@ -28,7 +27,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-// app.use(session({secret : 'session'})); //Do the auth logic 
+app.use(session({secret : 'session'})); //Do the auth logic 
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -43,7 +42,6 @@ app.use('/reg', reg);
 
 app.use(function(req, res, next) {
    if(req.session.username !== undefined) {
-	   console.log('inininin');
 	   next();
    }
    else{
@@ -57,7 +55,6 @@ app.use('/index', routes);
 app.use('/introduction', introduction);
 app.use('/mining', mining);
 app.use('/chart', chart);
-app.use('/logout', logout);	
 // app.use('/result', result);
 // app.use('/searchcustomer',searchcustomer);
 // app.use('/customer',customer);
