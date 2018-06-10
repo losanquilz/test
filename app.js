@@ -43,24 +43,10 @@ app.use('/introduction', introduction);
 app.use('/mining', mining);
 app.use('/chart', chart);
 
-var mysql = require("mysql");
-if (app.get('env') === 'production') {
-  var con = mysql.createConnection({
-    socketPath: "/run/mysqld/mysqld.sock",
-    user: "test",
-    password: "realone",
-    database: "test"
-  });
-} else {
-  var con = mysql.createConnection({
-    host: "140.119.19.40",
-    user: "test",
-    password: "realone",
-    database: "test"
-  });
-}
+// test db connection
+var pool = require('./libs/db.js')
 
- con.connect(function(err) {
+ pool.getConnection(function(err) {
     if (err) {
         console.log('connecting error');
         return;
