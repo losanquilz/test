@@ -14,7 +14,6 @@ router.post('/', function(req, res, next) {
   var pageNo = parseInt(req.query.pageNo);
   var username = req.body['username'];
   var password = req.body['password'];
-  
   pool.query('insert into admin set ?', [{  //新增資料
       username:username,
 	  password:password

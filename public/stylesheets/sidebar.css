@@ -58,8 +58,9 @@ body{
 }
 
 .container-fluid a{
-  color: #beaa55;
+  color: #000000;
   line-height: 20px;
+  font-size:16px;
 }
 
 .container-fluid p{
@@ -144,7 +145,7 @@ body{
     display: block;
     color: #00000;
     font-size: 12px;
-    margin-top: 240px;
+    margin-top: 300px;
 }
 
 
