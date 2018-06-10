@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport');
 var routes = require('./routes/index');
 var introduction = require('./routes/introduction');
 var mining = require('./routes/mining');
@@ -24,19 +25,22 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({ secret: 'dsfjaldfjoi', resave: true, saveUninitialized: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/', login);
 app.use('/reg', reg);
 
-// app.use(function(req, res, next) {
-   // if(req.session.username !== undefined) {
-	   // next();
-   // }
-   // else{
-      // res.redirect('/');
-   // }
-// });
+app.use(function(req, res, next) {
+   if(req.session !== undefined) {
+	   next();
+   }
+   else{
+      res.redirect('/');
+   }
+});
 
 app.use('/index', routes);
 app.use('/introduction', introduction);
