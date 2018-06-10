@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-sessions');
+var crypto = require('crypto');
 var routes = require('./routes/index');
 var introduction = require('./routes/introduction');
 var mining = require('./routes/mining');
