@@ -1,24 +1,27 @@
-var express = require('express'),
-    router = express.Router(),
-    User = require('../models/user.js'),
-    crypto = require('crypto'),
-    TITLE_REG = '註冊';
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
+var pool = require('../libs/db.js');
 
-router.get('/', function(req, res) {
-  res.render('reg',{title:TITLE_REG});
-});
+var message = '';
 
-router.post('/', function(req, res) {
-  var userName = req.body['txtUserName'],
-      userPwd = req.body['txtUserPwd'],
-      userRePwd = req.body['txtUserRePwd'],     
-      md5 = crypto.createHash('md5');
- 
-      userPwd = md5.update(userPwd).digest('hex');
+router.get('/', function(req, res, next) {
+  var pageNo = parseInt(req.query.pageNo);
+  res.render('reg', { pageNo:pageNo, message:message});
+});	
 
-  var newUser = new User({
-      username: userName,
-      userpass: userPwd
+router.post('/', function(req, res, next) {
+  var pageNo = parseInt(req.query.pageNo);
+  var username = req.body['username'];
+  var password = req.body['password'];
+  
+  pool.query('insert into admin set ?', [{  //新增資料
+      username:username,
+	  password:password
+    }] , function(err, results) {
+      if(err) throw err;
+      res.redirect('/');
   });
 });
+
 module.exports = router;

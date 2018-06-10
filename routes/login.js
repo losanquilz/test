@@ -14,32 +14,32 @@ app.use(session({
 }));
 app.use(router);
 
-var messages ='';  //錯誤訊息
+var messages ='';  
 router.get('/', function(req, res, next) {
-  var pageNo = parseInt(req.query.pageNo);  //取得傳送的目前頁數
-  if (req.session.username) {  //session值存在表示使用者已登入
-    res.redirect('/');  //開啟管理頁面
-  } else {  //session值不存在就到登入頁面
+  var pageNo = parseInt(req.query.pageNo);  
+  if (req.session.username) {  
+    res.redirect('/');  
+  } else {  
     res.render('login', {messages:messages, pageNo:pageNo});
   }
 });
 
-router.post('/', function(req, res) {  //按登入系統鈕
+router.post('/', function(req, res) {  
   var pageNo = parseInt(req.query.pageNo);
-  var username = req.body['username'];  //取得輸入的帳號
-  var password = req.body['password'];  //取得輸入的密碼
-  pool.query("select username,password from admin where username=?",[username], function(err, results) {  //根據帳號讀取資料
+  var username = req.body['username']; 
+  var password = req.body['password']; 
+  pool.query("select username,password from admin where username=?",[username], function(err, results) {  
     if(err) throw err;
-    if(results.length == 0) {  //帳號不存在
+    if(results.length == 0) {  
       messages = "帳號不正確！"
       res.render('login', {messages:messages, pageNo:pageNo})
-    } else if(results[0].password != password) {  //密碼不正確
+    } else if(results[0].password != password) {  
       messages = "密碼不正確！"
       res.render('login', {messages:messages, pageNo:pageNo})
-    } else {  //帳號及密碼皆正確
-      req.session.username = username;  //設定session
-      res.redirect('/index');  //開啟管理頁面
-    }
+    } else {  
+      req.session.username = username;  
+      res.redirect('/index');
+	  }
   });
 });
 

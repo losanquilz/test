@@ -4,21 +4,21 @@ var DB_NAME = 'test';
 var pool  = mysql.createPool({
     host     : '140.119.19.40',
     user     : 'test',
-    password : '1u4u,4'
+    password : 'realone'
 });
 function User(user){
     this.username = user.username;
-    this.userpass = user.userpass;
+    this.password = user.password;
 };
 User.prototype.save = function save(callback) {
         var user = {
             username: this.username,
-            userpass: this.userpass
+            password: this.password
         };
 
-        var cmd = "INSERT INTO userinfo(id, username, userpass) VALUES(0,?,?)";
+        var cmd = "INSERT INTO userinfo(id, username, password) VALUES(0,?,?)";
 
-        connection.query(cmd, [user.username, user.userpass], function (err,result) {
+        connection.query(cmd, [user.username, user.password], function (err,result) {
             if (err) {
                 return;
             }
@@ -27,3 +27,4 @@ User.prototype.save = function save(callback) {
             callback(err,result);                     
         });       
     };
+module.exports = router;
